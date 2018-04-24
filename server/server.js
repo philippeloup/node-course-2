@@ -22,7 +22,7 @@ app.post('/todos',(req,res) => {
   todo.save().then((doc) =>{
     res.send(doc);
   }, (e) =>{
-    res.status(400).send(e);update
+    res.status(400).send(e);
   })
 });
 
@@ -95,6 +95,20 @@ app.patch('/todos/:id',(req,res) =>{
     res.send({todo});
   }).catch((e)=>{
     res.status(400).send();
+  })
+});
+
+// POST /users
+app.post('/users',(req,res) => {
+  var body = _.pick(req.body, ['email','password']);
+  var user  = new User(body);
+
+  user.save().then(() => {
+    return user.generateAuthToken();
+  }).then((token) =>{
+    res.header('x-auth', token).send(user);
+  }).catch( (e) =>{
+    res.status(400).send(e);
   })
 });
 
