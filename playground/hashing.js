@@ -22,9 +22,9 @@ bcrypt.compare(password, hashedPassword,(err,res) => {
 //   id: 10
 // };
 //
-// var token = jwt.sign(data, 'abc123');
+// var token = jwt.sign(data, process.env.JWT_SECRET);
 // console.log(token);
-// var decode = jwt.verify(token,'abc123');
+// var decode = jwt.verify(token,process.env.JWT_SECRET);
 // console.log('Decoded: ', decode);
 
 
